@@ -1,0 +1,64 @@
+ ### BOOK TABLE 
+                    #cursor.execute(""" CREATE  TABLE Books_details (
+                     #                  ISBN text PRIMARY KEY NOT NULL,
+                      #                 author_id text,
+                       #                publisher_id text,
+                        #               genre text,
+                         #              quantity number INT ,
+                          #             price INT,
+                           #            FOREIGN KEY (author_id) REFERENCES author_details(author_id),
+                            #           FOREIGN KEY (publisher_id) REFERENCES publisher_details(publisher_id))""")
+                    
+                    ### AUTHOR TABLE
+                   # cursor.execute(""" CREATE TABLE author_details(
+                    #                  author_id text PRIMARY KEY NOT NULL,
+                     #                 name text,
+                      #                nationality text) """)
+                    ### publisher table 
+                   # cursor.execute("""  CREATE TABLE publisher_details(
+                    #                  publisher_id text PRIMARY KEY NOT NULL,
+                     ##                 publish_date INT,
+                       #               publisher_name text)""")
+                           
+                    #cursor.execute("Alter table Books_details add column book_name text")
+                    #cursor.execute("Alter table Books_details add column year INT")
+
+
+
+
+                           connection=sqlite3.connect("library_sys2.db")
+            cursor=connection.cursor()
+            cursor.execute("""  CREATE TABLE Customer_details(
+                                Customer_Id text PRIMARY KEY NOT NULL,
+                                First_name text,
+                                Last_name text,
+                                email text,
+                                phone_no text)""")
+            connection.commit()
+            connection.close()
+
+           cursor.execute("Alter table Customer_details add column gender text")
+
+
+
+
+
+
+
+
+connection=sqlite3.connect("library_sys2.db")
+            cursor=connection.cursor()
+            cursor.execute(""" Create table orders(
+                               order_id  text PRIMARY KEY NOT NULL,
+                               ISBN text, 
+                               Customer_id text,
+                               address text,
+                               quantity text,
+                               mobile_no text,
+                               time text,
+                               FOREIGN KEY (ISBN) REFERENCES Books_details(ISBN),
+                               FOREIGN KEY (Customer_id) REFERENCES Customer_details(Customer_Id)
+                               )                     
+                           
+                           """)
+cursor.execute("Alter table orders add column status text")
